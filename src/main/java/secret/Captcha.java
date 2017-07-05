@@ -4,39 +4,46 @@ package secret;
  * Created by oo8 on 7/5/2017 AD.
  */
 public class Captcha {
-    private int left;
-    private int right;
-    private int operator;
+    private Operand left;
+    private Operand right;
+    private Operator operator;
     private int pattern;
     private final String[] operandArr = new String[]{"One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine"};
 
     public Captcha(int pattern, int left, int operator, int right) {
-        this.left = left;
-        this.right = right;
-        this.operator = operator;
+        this.left = createLeft(pattern, left);
+        this.right = createRight(pattern, right);
+        this.operator = new Operator(operator);
         this.pattern = pattern;
     }
 
-    public String getLeft() {
+    public Operand createLeft(int pattern, int value) {
         if (pattern == 2) {
-            return String.valueOf(this.left);
+            return new IntegerOperand(value);
         }
-        return operandArr[this.left - 1];
+        return new StringOperand(value);
     }
 
-    public String getRight() {
+    public Operand createRight(int pattern, int value) {
         if (pattern == 2) {
-            return operandArr[this.right - 1];
+            return new StringOperand(value);
         }
-        return String.valueOf(this.right);
+        return new IntegerOperand(value);
     }
 
-    public String getOperator() {
-        String[] x = {"+", "*", "-"};
-        return x[this.operator - 1];
+    public Operator getOperator() {
+        return this.operator;
     }
 
     public String getCaptchaResult() {
-        return String.format("%s %s %s", this.getLeft(), this.getOperator(), this.getRight());
+        return String.format("%s %s %s", this.left, this.getOperator(), this.right);
+    }
+
+    public Operand getLeft() {
+        return this.left;
+    }
+
+    public Object getRight() {
+        return this.right;
     }
 }
