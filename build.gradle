@@ -1,0 +1,22 @@
+group 'th.co.ais.tdd'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceCompatibility = 1.8
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+task myRun(type: JavaExec) {
+    classpath sourceSets.main.runtimeClasspath
+    main = "secret.Captcha"
+    args "arg1", "arg2"
+}
