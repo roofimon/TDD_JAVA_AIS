@@ -1,7 +1,8 @@
 .gitignore
 .gradle/
 .idea/
-
+build
+target
 
 # Created by https://www.gitignore.io/api/java,maven,macos,gradle,windows,intellij
 
